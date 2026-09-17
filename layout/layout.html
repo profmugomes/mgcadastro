@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title> <!-- 1. Título dinâmico -->
+</head>
+<body>
+    <main>
+        {{block "conteudo" .}}
+            <p>Conteúdo padrão caso a página não defina nada.</p>
+        {{end}}
+    </main>
+</body>
+</html>

@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
+
+	"github.com/profmugomes/mgcadastro/cadastro"
 
 	// "strings"
 
@@ -11,17 +12,12 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 )
 
-type PageData struct {
-	Title, 
-	User string
-}
+// func homeHandler(w http.ResponseWriter, r *http.Request) {
+// 	//http.ServeFile(w, r, "app/index.html")
 
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	//http.ServeFile(w, r, "app/index.html")
-
-	tpl := template.Must(template.ParseFiles("app/index.html"))
-	_ = tpl.Execute(w, PageData{Title: "Home Page", User: "Teste"})
-}
+// 	tpl := template.Must(template.ParseFiles("app/index.html"))
+// 	_ = tpl.Execute(w, PageData{Title: "Home Page", User: "Teste"})
+// }
 
 // func trailingSlash(next http.Handler) http.Handler {
 // 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -44,12 +40,14 @@ func main() {
 	rt.Use(middleware.RedirectSlashes)
 	// rt.Use(trailingSlash)
 
-	rt.Get("/", homeHandler)
-	rt.Route("/categoria", func(rt chi.Router) {
-		rt.Get("/teste", func(w http.ResponseWriter, r *http.Request) {
-			w.Write([]byte("Teste"))
-		})
-	})
+	rt.Get("/", cadastro.Lista)
+	rt.Get("/editar", cadastro.Editar)
+
+	// rt.Route("/categoria", func(rt chi.Router) {
+	// 	rt.Get("/teste", func(w http.ResponseWriter, r *http.Request) {
+	// 		w.Write([]byte("Teste"))
+	// 	})
+	// })
 
   	fmt.Println("Servidor iniciado em 127.0.0.1:8000")
 
