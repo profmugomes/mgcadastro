@@ -8,8 +8,6 @@ import (
 
 type PageContext struct {
 	Title string      // Título da aba do navegador
-	// Menu  MenuData    // Dados exclusivos do Menu
-	// User  UserData    // Usuário logado
 	Data any // Dados específicos da página (Lista, Formulários, etc.)
 }
 

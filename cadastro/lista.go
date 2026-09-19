@@ -7,8 +7,9 @@ import (
 )
 
 func Lista(w http.ResponseWriter, r *http.Request) {
-	render.Show(w, http.StatusOK, "lista.html", render.PageContext{
-		Title: "Lista de Cadastro",
-		Data:  []string{"Teste 1", "Teste 2"},
+	render.Show(w, http.StatusOK, "lista.html", map[string]any{
+		"Title": "Lista de Cadastro",
+		"Outro": []string{"Teste 1", "Teste 2"},
+		"Data":  []map[string]string{{"Titulo": "Exemplo", "Idade": "29"}},
 	})
 }
