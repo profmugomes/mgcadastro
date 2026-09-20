@@ -5,6 +5,8 @@ import (
 	"net/http"
 
 	"github.com/profmugomes/mgcadastro/cadastro"
+	"github.com/profmugomes/mgcadastro/menu"
+	"github.com/profmugomes/mgrender"
 
 	// "strings"
 
@@ -31,29 +33,50 @@ import (
 // }
 
 func main() {
-	// mux := http.NewServeMux()
-	// mux.HandleFunc("/", homeHandler)
-	// mux.HandleFunc()
+	tpl := mgrender.New("layout/layout.html")
+	tpl.AddFile("layout/menu.html")
+	tpl.SetData("MenuData", menu.Menu())
 
 	rt := chi.NewRouter()
 
 	rt.Use(middleware.RedirectSlashes)
-	// rt.Use(trailingSlash)
 
-	rt.Get("/", cadastro.Lista)
-	rt.Get("/editar", cadastro.Editar)
+	rt.Get("/", tpl.Handle(cadastro.Lista))
+	rt.Get("/editar", tpl.Handle(cadastro.Editar))
 
-	// rt.Route("/categoria", func(rt chi.Router) {
-	// 	rt.Get("/teste", func(w http.ResponseWriter, r *http.Request) {
-	// 		w.Write([]byte("Teste"))
-	// 	})
-	// })
-
-  	fmt.Println("Servidor iniciado em 127.0.0.1:8000")
+	fmt.Println("Servidor iniciado em 127.0.0.1:8000")
 
 	err := http.ListenAndServe(":8000", rt)
-	if (err != nil) {
-		fmt.Println("Erro ao iniciar o servidor: ", err)
-		return
+	if err != nil {
+		fmt.Println("Erro ao iniciar o servidor:", err)
 	}
+
+	// tpl := render.New()
+	// mux := http.NewServeMux()
+	// mux.HandleFunc("/", homeHandler)
+	// mux.HandleFunc()
+
+	// 	rt := chi.NewRouter()
+
+	// 	rt.Use(middleware.RedirectSlashes)
+	// 	// rt.Use(trailingSlash)
+
+	// 	rt.Get("/", cadastro.Lista)
+	// 	rt.Get("/editar", cadastro.Editar)
+
+	// 	// rt.Route("/categoria", func(rt chi.Router) {
+	// 	// 	rt.Get("/teste", func(w http.ResponseWriter, r *http.Request) {
+	// 	// 		w.Write([]byte("Teste"))
+	// 	// 	})
+	// 	// })
+
+	// 	fmt.Println("Servidor iniciado em 127.0.0.1:8000")
+
+	// 	err := http.ListenAndServe(":8000", rt)
+	// 	if err != nil {
+	// 		fmt.Println("Erro ao iniciar o servidor: ", err)
+	// 		return
+	// 	}
+
+	// tpl.Show()
 }

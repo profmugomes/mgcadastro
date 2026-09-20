@@ -1,0 +1,12 @@
+{{define "conteudo"}}
+    <h1>{{.Title}}</h1>
+    <ul>
+        {{range .Data}}
+            <li>{{.Idade}}</li>
+        {{end}}
+    </ul>
+
+    {{range .Outro}}
+        <li>{{.}}</li>
+    {{end}}
+{{end}}

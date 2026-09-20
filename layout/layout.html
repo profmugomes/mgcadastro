@@ -6,6 +6,10 @@
     <title>{{.Title}}</title> <!-- 1. Título dinâmico -->
 </head>
 <body>
+    {{block "menu" .}}
+        <p>Sem menu</p>
+    {{end}}
+    
     <main>
         {{block "conteudo" .}}
             <p>Conteúdo padrão caso a página não defina nada.</p>
